@@ -16,6 +16,16 @@ interface RegexProperty {
     regex: RegExp;
 }
 
+interface EqualityConstraintDefinition {
+    constraint: "equality";
+    value: string;
+}
+
+interface InequalityConstraintDefinition {
+    constraint: "inequality";
+    value: string;
+}
+
 interface LengthEqualityConstraintDefinition extends LengthProperty {
     constraint: "length-equality";
 }
@@ -61,6 +71,8 @@ type LengthRegexConstraintDefinition =
 
 type ConstraintDefinitions =
     | EmptyConstraintDefinition
+    | EqualityConstraintDefinition
+    | InequalityConstraintDefinition
     | EnumConstraintDefinition
     | LengthConstraintDefinition
     | LengthRangeConstraintDefinition
