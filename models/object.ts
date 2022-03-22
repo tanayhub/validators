@@ -1,15 +1,9 @@
-import ArrayDefinition from "./array";
-import BooleanDefinition from "./boolean";
-import { EmptyConstraintDefinition, RangeDefinition } from "./commons";
-import NumberDefinition from "./number";
-import StringDefinition from "./string";
+import ValidationDefinition from ".";
+import { EmptyConstraintDefinition } from "./commons";
 
 interface TypeDefinition {
     type: "object";
-    children: Record<
-        string,
-        NumberDefinition | StringDefinition | BooleanDefinition | ArrayDefinition
-    >;
+    children: Record<string, ValidationDefinition>;
 }
 
 type ConstraintDefinitions = EmptyConstraintDefinition;

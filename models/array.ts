@@ -1,11 +1,9 @@
-import BooleanDefinition from "./boolean";
+import ValidationDefinition from ".";
 import { EmptyConstraintDefinition, RangeDefinition } from "./commons";
-import NumberDefinition from "./number";
-import StringDefinition from "./string";
 
 interface TypeDefinition {
     type: "array";
-    items: NumberDefinition | StringDefinition | BooleanDefinition;
+    items: ValidationDefinition;
 }
 
 interface LengthProperty {
