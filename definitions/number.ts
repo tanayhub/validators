@@ -34,7 +34,7 @@ interface DefinitionModeValueBetween extends DefinitionPropertyMin, DefinitionPr
     mode: "between";
 }
 
-interface DefinitionModeIntegerValueBetween extends DefinitionPropertyMax {
+interface DefinitionModeIntegerValueBetween extends DefinitionPropertyMin, DefinitionPropertyMax {
     mode: "integer|between";
 }
 

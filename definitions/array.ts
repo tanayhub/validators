@@ -2,7 +2,7 @@ import Definition, { DefinitionModeLength, DefinitionModeUndefined } from ".";
 
 interface ArrayDefinitionType {
     type: "array";
-    eachElement?: Definition;
+    eachElement: Definition;
 }
 
 type DefinitionModes = DefinitionModeUndefined | DefinitionModeLength;
