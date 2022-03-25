@@ -26,6 +26,12 @@ A node utility that helps validate json objects with the ease of autocomplete
     -   [ ] inequality
 -   string
     -   [ ] enum
+    -   [ ] regex
+    -   [ ] regex|min-length
+    -   [ ] regex|max-length
+    -   [ ] regex|length-between
+    -   [ ] regex|length-equality
+    -   [ ] regex|length-inequality
     -   [ ] equality
     -   [ ] inequality
     -   [ ] min-length
@@ -40,7 +46,6 @@ A node utility that helps validate json objects with the ease of autocomplete
     -   url
     -   email
     -   tuple
-    -   regex
     -   custom
     -   strict
     -   unique

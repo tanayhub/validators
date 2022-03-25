@@ -21,6 +21,10 @@ export interface DefinitionPropertyMax {
     max: number;
 }
 
+export interface DefinitionPropertyLength {
+    length: number;
+}
+
 export interface DefinitionPropertyValue<Type> {
     value: Type;
 }
@@ -57,11 +61,11 @@ interface DefinitionModeLengthBetween extends DefinitionPropertyMin, DefinitionP
     mode: "length-between";
 }
 
-interface DefinitionModeLengthEquality extends DefinitionPropertyValue<number> {
+interface DefinitionModeLengthEquality extends DefinitionPropertyLength {
     mode: "length-equality";
 }
 
-interface DefinitionModeLengthInequality extends DefinitionPropertyValue<number> {
+interface DefinitionModeLengthInequality extends DefinitionPropertyLength {
     mode: "length-inequality";
 }
 
