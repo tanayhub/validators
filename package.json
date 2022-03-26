@@ -1,5 +1,5 @@
 {
-    "name": "validator",
+    "name": "compiled-validations",
     "version": "1.0.0",
     "description": "A node utility that helps validate json objects with the ease of autocomplete",
     "main": "build/index.js",
@@ -10,7 +10,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/tanayhub/validator.git"
+        "url": "git+https://github.com/tanayhub/compiled-validations.git"
     },
     "keywords": [
         "validation",
@@ -21,9 +21,9 @@
     "author": "tanayhub",
     "license": "Apache-2.0",
     "bugs": {
-        "url": "https://github.com/tanayhub/validator/issues"
+        "url": "https://github.com/tanayhub/compiled-validations/issues"
     },
-    "homepage": "https://github.com/tanayhub/validator#readme",
+    "homepage": "https://github.com/tanayhub/compiled-validations#readme",
     "devDependencies": {
         "@types/node": "^17.0.22",
         "typescript": "^4.6.2"
