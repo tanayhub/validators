@@ -2,9 +2,11 @@
     "name": "validator",
     "version": "1.0.0",
     "description": "A node utility that helps validate json objects with the ease of autocomplete",
-    "main": "index.ts",
+    "main": "build/index.js",
+    "types": "build/index.d.ts",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build": "tsc",
+        "prepare": "npm run build"
     },
     "repository": {
         "type": "git",
