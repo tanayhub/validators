@@ -1,1 +1,1 @@
-export { default as validate } from "./validations";
+export { default as compile } from "./validations";
