@@ -51,7 +51,7 @@ export default function compileArray(definition: ArrayDefinition): ValidationFun
     } else if (definition.mode === "length-equality") {
         validations.push(compileLengthEquality(definition.length));
     } else if (definition.mode === "length-inequality") {
-        validations.push(compileLengthEquality(definition.length));
+        validations.push(compileLengthInequality(definition.length));
     }
 
     return (payload: any): string[] => {

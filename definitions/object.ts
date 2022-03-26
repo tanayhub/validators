@@ -3,7 +3,7 @@ import Definition, { DefinitionModeUndefined } from ".";
 interface ObjectDefinitionType {
     type: "object";
     instanceOf?: CallableFunction;
-    properties?: Record<string, Definition>;
+    properties: Record<string, Definition>;
 }
 
 type DefinitionModes = DefinitionModeUndefined;

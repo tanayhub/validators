@@ -6,6 +6,8 @@ import compileFunction from "./function";
 import compileHybrid from "./hybrid";
 import compileNull from "./null";
 import compileNumber from "./number";
+import compileObject from "./object";
+import compileString from "./string";
 import compileUndefined from "./undefined";
 
 export type ValidationFunction = (payload: any) => string[];
@@ -26,7 +28,9 @@ export default function compile(definition: Definition): ValidationFunction {
     } else if (definition.type === "number") {
         return compileNumber(definition);
     } else if (definition.type === "object") {
+        return compileObject(definition);
     } else if (definition.type === "string") {
+        return compileString(definition);
     } else if (definition.type === "undefined") {
         return compileUndefined(definition);
     }
