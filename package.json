@@ -7,7 +7,8 @@
     "scripts": {
         "build": "tsc",
         "test": "echo \"Error: no test specified\"",
-        "prepare": "npm run build"
+        "prepare": "npm run build",
+        "postversion": "git push && git push --tags"
     },
     "repository": {
         "type": "git",
