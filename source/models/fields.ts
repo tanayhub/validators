@@ -1,4 +1,5 @@
 import { ForcedArray } from "./general";
+import { Schema } from "./schemas";
 
 export interface NoField {}
 
@@ -7,7 +8,7 @@ export interface InstanceField {
 }
 
 export interface KeyValueField {
-    keyValue: Record<string, void>; // TODO
+    keyValue: Record<string, Schema | ForcedArray<Schema>>;
 }
 
 export interface EqualField<Type> {
@@ -61,3 +62,43 @@ export interface ValueMinField {
 export interface ValueNotEqualField<Type> {
     value: NotEqualField<Type>;
 }
+
+export type InstanceAndKeyValueField = InstanceField & KeyValueField;
+
+export type InstanceAndValueNotEqualField = InstanceField & NotEqualField<object>;
+
+export type IntegerAndValueMaxField = NoField & ValueMaxField;
+
+export type IntegerAndValueMinField = NoField & ValueMinField;
+
+export type IntegerAndValueNotEqualField = NoField & ValueNotEqualField<number>;
+
+export type LengthEqualAndPatternField = LengthEqualField & PatternField;
+
+export type LengthEqualAndValueNotEqualField = LengthEqualField & ValueNotEqualField<string>;
+
+export type LengthMaxMinField = LengthMaxField & LengthMinField;
+
+export type LengthMaxNotEqualField = LengthMaxField & LengthNotEqualField;
+
+export type LengthMaxAndPatternField = LengthMaxField & PatternField;
+
+export type LengthMaxAndValueNotEqualField = LengthMaxField & ValueNotEqualField<string>;
+
+export type LengthMinNotEqualField = LengthMinField & LengthNotEqualField;
+
+export type LengthMinAndPatternField = LengthMinField & PatternField;
+
+export type LengthMinAndValueNotEqualField = LengthMinField & ValueNotEqualField<string>;
+
+export type LengthNotEqualAndPatternField = LengthNotEqualField & PatternField;
+
+export type LengthNotEqualAndValueNotEqualField = LengthNotEqualField & ValueNotEqualField<string>;
+
+export type PatternAndValueNotEqualField = PatternField & ValueNotEqualField<string>;
+
+export type ValueMaxMinField = ValueMaxField & ValueMinField;
+
+export type ValueMaxNotEqualField = ValueMaxField & ValueNotEqualField<number>;
+
+export type ValueMinNotEqualField = ValueMinField & ValueNotEqualField<number>;
