@@ -156,3 +156,25 @@ export type LengthNotEqualAndPatternAndValueNotEqualField = LengthNotEqualAndPat
     ValueNotEqualField<string>;
 
 export type ValueMaxMinNotEqualField = ValueMaxMinField & ValueNotEqualField<number>;
+
+export type IntegerAndValueMaxMinNotEqualField = IntegerAndValueMaxMinField &
+    ValueNotEqualField<number>;
+
+export type LengthMaxMinNotEqualAndPatternField = LengthMaxMinNotEqualField & PatternField;
+
+export type LengthMaxMinNotEqualAndSchemaField = LengthMaxMinNotEqualField & SchemaField;
+
+export type LengthMaxMinNotEqualAndValueNotEqualField = LengthMaxMinNotEqualField &
+    ValueNotEqualField<string>;
+
+export type LengthMaxMinAndPatternAndValueNotEqualField = LengthMaxMinAndPatternField &
+    ValueNotEqualField<string>;
+
+export type LengthMaxNotEqualAndPatternAndValueNotEqualField = LengthMaxNotEqualAndPatternField &
+    ValueNotEqualField<string>;
+
+export type LengthMinNotEqualAndPatternAndValueNotEqualField = LengthMinNotEqualAndPatternField &
+    ValueNotEqualField<string>;
+
+export type LengthMaxMinNotEqualAndPatternAndValueNotEqualField = LengthMaxMinNotEqualAndPatternField &
+    ValueNotEqualField<string>;
