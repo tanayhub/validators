@@ -47,6 +47,10 @@ export interface PatternField {
     pattern: string | RegExp;
 }
 
+export interface SchemaField {
+    schemas: Schema | ForcedArray<Schema>;
+}
+
 export interface ValueEqualField<Type> {
     value: EqualField<Type>;
 }
@@ -75,6 +79,8 @@ export type IntegerAndValueNotEqualField = NoField & ValueNotEqualField<number>;
 
 export type LengthEqualAndPatternField = LengthEqualField & PatternField;
 
+export type LengthEqualAndSchemaField = LengthEqualField & SchemaField;
+
 export type LengthEqualAndValueNotEqualField = LengthEqualField & ValueNotEqualField<string>;
 
 export type LengthMaxMinField = LengthMaxField & LengthMinField;
@@ -83,15 +89,21 @@ export type LengthMaxNotEqualField = LengthMaxField & LengthNotEqualField;
 
 export type LengthMaxAndPatternField = LengthMaxField & PatternField;
 
+export type LengthMaxAndSchemaField = LengthMaxField & SchemaField;
+
 export type LengthMaxAndValueNotEqualField = LengthMaxField & ValueNotEqualField<string>;
 
 export type LengthMinNotEqualField = LengthMinField & LengthNotEqualField;
 
 export type LengthMinAndPatternField = LengthMinField & PatternField;
 
+export type LengthMinAndSchemaField = LengthMinField & SchemaField;
+
 export type LengthMinAndValueNotEqualField = LengthMinField & ValueNotEqualField<string>;
 
 export type LengthNotEqualAndPatternField = LengthNotEqualField & PatternField;
+
+export type LengthNotEqualAndSchemaField = LengthNotEqualField & SchemaField;
 
 export type LengthNotEqualAndValueNotEqualField = LengthNotEqualField & ValueNotEqualField<string>;
 
