@@ -92,6 +92,4 @@ A node utility that helps validate json objects with the ease of autocomplete
 | strict     | object        |
 | unique     | array         |
 | contains   | array, string |
-| url        | string        |
-| email      | string        |
 | custom     | any           |
