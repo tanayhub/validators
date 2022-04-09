@@ -157,11 +157,11 @@ export interface LengthEqualAndValueNotEqualConstraint extends LengthEqualAndVal
 }
 
 export interface LengthMaxMinConstraint extends LengthMaxMinField {
-    constraint: "length[max,min]";
+    constraint: "length[max;min]";
 }
 
 export interface LengthMaxNotEqualConstraint extends LengthMaxNotEqualField {
-    constraint: "length[max,not-equal]";
+    constraint: "length[max;not-equal]";
 }
 
 export interface LengthMaxAndPatternConstraint extends LengthMaxAndPatternField {
@@ -177,7 +177,7 @@ export interface LengthMaxAndValueNotEqualConstraint extends LengthMaxAndValueNo
 }
 
 export interface LengthMinNotEqualConstraint extends LengthMinNotEqualField {
-    constraint: "length[min,not-equal]";
+    constraint: "length[min;not-equal]";
 }
 
 export interface LengthMinAndPatternConstraint extends LengthMinAndPatternField {
@@ -210,27 +210,27 @@ export interface PatternAndValueNotEqualConstraint extends PatternAndValueNotEqu
 }
 
 export interface ValueMaxMinConstraint extends ValueMaxMinField {
-    constraint: "value[max,min]";
+    constraint: "value[max;min]";
 }
 
 export interface ValueMaxNotEqualConstraint extends ValueMaxNotEqualField {
-    constraint: "value[max,not-equal]";
+    constraint: "value[max;not-equal]";
 }
 
 export interface ValueMinNotEqualConstraint extends ValueMinNotEqualField {
-    constraint: "value[min,not-equal]";
+    constraint: "value[min;not-equal]";
 }
 
 export interface IntegerAndValueMaxMinConstraint extends IntegerAndValueMaxMinField {
-    constraint: "integer,value[max,min]";
+    constraint: "integer,value[max;min]";
 }
 
 export interface IntegerAndValueMaxNotEqualConstraint extends IntegerAndValueMaxNotEqualField {
-    constraint: "integer,value[max,not-equal]";
+    constraint: "integer,value[max;not-equal]";
 }
 
 export interface IntegerAndValueMinNotEqualConstraint extends IntegerAndValueMinNotEqualField {
-    constraint: "integer,value[min,not-equal]";
+    constraint: "integer,value[min;not-equal]";
 }
 
 export interface LengthEqualAndPatternAndValueNotEqualConstraint
@@ -239,32 +239,32 @@ export interface LengthEqualAndPatternAndValueNotEqualConstraint
 }
 
 export interface LengthMaxMinNotEqualConstraint extends LengthMaxMinNotEqualField {
-    constraint: "length[max,min,not-equal]";
+    constraint: "length[max;min;not-equal]";
 }
 
 export interface LengthMaxMinAndPatternConstraint extends LengthMaxMinAndPatternField {
-    constraint: "length[max,min],pattern";
+    constraint: "length[max;min],pattern";
 }
 
 export interface LengthMaxMinAndUnorderedConstraint extends LengthMaxMinAndSchemaField {
-    constraint: "length[max,min],unordered";
+    constraint: "length[max;min],unordered";
 }
 
 export interface LengthMaxMinAndValueNotEqualConstraint extends LengthMaxMinAndValueNotEqualField {
-    constraint: "length[max,min],value[not-equal]";
+    constraint: "length[max;min],value[not-equal]";
 }
 
 export interface LengthMaxNotEqualAndPatternConstraint extends LengthMaxNotEqualAndPatternField {
-    constraint: "length[max,not-equal],pattern";
+    constraint: "length[max;not-equal],pattern";
 }
 
 export interface LengthMaxNotEqualAndUnorderedConstraint extends LengthMaxNotEqualAndSchemaField {
-    constraint: "length[max,not-equal],unordered";
+    constraint: "length[max;not-equal],unordered";
 }
 
 export interface LengthMaxNotEqualAndValueNotEqualConstraint
     extends LengthMaxNotEqualAndValueNotEqualField {
-    constraint: "length[max,not-equal],value[not-equal]";
+    constraint: "length[max;not-equal],value[not-equal]";
 }
 
 export interface LengthMaxAndPatternAndValueNotEqualConstraint
@@ -273,16 +273,16 @@ export interface LengthMaxAndPatternAndValueNotEqualConstraint
 }
 
 export interface LengthMinNotEqualAndPatternConstraint extends LengthMinNotEqualAndPatternField {
-    constraint: "length[min,not-equal],pattern";
+    constraint: "length[min;not-equal],pattern";
 }
 
 export interface LengthMinNotEqualAndUnorderedConstraint extends LengthMinNotEqualAndSchemaField {
-    constraint: "length[min,not-equal],unordered";
+    constraint: "length[min;not-equal],unordered";
 }
 
 export interface LengthMinNotEqualAndValueNotEqualConstraint
     extends LengthMinNotEqualAndValueNotEqualField {
-    constraint: "length[min,not-equal],value[not-equal]";
+    constraint: "length[min;not-equal],value[not-equal]";
 }
 
 export interface LengthMinAndPatternAndValueNotEqualConstraint
@@ -296,47 +296,47 @@ export interface LengthNotEqualAndPatternAndValueNotEqualConstraint
 }
 
 export interface ValueMaxMinNotEqualConstraint extends ValueMaxMinNotEqualField {
-    constraint: "value[max,min,not-equal]";
+    constraint: "value[max;min;not-equal]";
 }
 
 export interface IntegerAndValueMaxMinNotEqualConstraint
     extends IntegerAndValueMaxMinNotEqualField {
-    constraint: "integer,value[max,min,not-equal]";
+    constraint: "integer,value[max;min;not-equal]";
 }
 
 export interface LengthMaxMinNotEqualAndPatternConstraint
     extends LengthMaxMinNotEqualAndPatternField {
-    constraint: "length[max,min,not-equal],pattern";
+    constraint: "length[max;min;not-equal],pattern";
 }
 
 export interface LengthMaxMinNotEqualAndUnorderedConstraint
     extends LengthMaxMinNotEqualAndSchemaField {
-    constraint: "length[max,min,not-equal],unordered";
+    constraint: "length[max;min;not-equal],unordered";
 }
 
 export interface LengthMaxMinNotEqualAndValueNotEqualConstraint
     extends LengthMaxMinNotEqualAndValueNotEqualField {
-    constraint: "length[max,min,not-equal],value[not-equal]";
+    constraint: "length[max;min;not-equal],value[not-equal]";
 }
 
 export interface LengthMaxMinAndPatternAndValueNotEqualConstraint
     extends LengthMaxMinAndPatternAndValueNotEqualField {
-    constraint: "length[max,min],pattern,value[not-equal]";
+    constraint: "length[max;min],pattern,value[not-equal]";
 }
 
 export interface LengthMaxNotEqualAndPatternAndValueNotEqualConstraint
     extends LengthMaxNotEqualAndPatternAndValueNotEqualField {
-    constraint: "length[max,not-equal],pattern,value[not-equal]";
+    constraint: "length[max;not-equal],pattern,value[not-equal]";
 }
 
 export interface LengthMinNotEqualAndPatternAndValueNotEqualConstraint
     extends LengthMinNotEqualAndPatternAndValueNotEqualField {
-    constraint: "length[min,not-equal],pattern,value[not-equal]";
+    constraint: "length[min;not-equal],pattern,value[not-equal]";
 }
 
 export interface LengthMaxMinNotEqualAndPatternAndValueNotEqualConstraint
     extends LengthMaxMinNotEqualAndPatternAndValueNotEqualField {
-    constraint: "length[max,min,not-equal],pattern,value[not-equal]";
+    constraint: "length[max;min;not-equal],pattern,value[not-equal]";
 }
 
 export type AnyConstraint = NoConstraint;

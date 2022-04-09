@@ -33,12 +33,12 @@ A node utility that helps validate json objects with the ease of autocomplete
 -   length[equal],pattern
 -   length[equal],unordered
 -   length[equal],value[not-equal]
--   length[max,min]
--   length[max,not-equal]
+-   length[max;min]
+-   length[max;not-equal]
 -   length[max],pattern
 -   length[max],unordered
 -   length[max],value[not-equal]
--   length[min,not-equal]
+-   length[min;not-equal]
 -   length[min],pattern
 -   length[min],unordered
 -   length[min],value[not-equal]
@@ -46,44 +46,44 @@ A node utility that helps validate json objects with the ease of autocomplete
 -   length[not-equal],unordered
 -   length[not-equal],value[not-equal]
 -   pattern,value[not-equal]
--   value[max,min]
--   value[max,not-equal]
--   value[min,not-equal]
+-   value[max;min]
+-   value[max;not-equal]
+-   value[min;not-equal]
 
 <!-- iteration 3 -->
 
--   integer,value[max,min]
--   integer,value[max,not-equal]
--   integer,value[min,not-equal]
+-   integer,value[max;min]
+-   integer,value[max;not-equal]
+-   integer,value[min;not-equal]
 -   length[equal],pattern,value[not-equal]
--   length[max,min,not-equal]
--   length[max,min],pattern
--   length[max,min],unordered
--   length[max,min],value[not-equal]
--   length[max,not-equal],pattern
--   length[max,not-equal],unordered
--   length[max,not-equal],value[not-equal]
+-   length[max;min;not-equal]
+-   length[max;min],pattern
+-   length[max;min],unordered
+-   length[max;min],value[not-equal]
+-   length[max;not-equal],pattern
+-   length[max;not-equal],unordered
+-   length[max;not-equal],value[not-equal]
 -   length[max],pattern,value[not-equal]
--   length[min,not-equal],pattern
--   length[min,not-equal],unordered
--   length[min,not-equal],value[not-equal]
+-   length[min;not-equal],pattern
+-   length[min;not-equal],unordered
+-   length[min;not-equal],value[not-equal]
 -   length[min],pattern,value[not-equal]
 -   length[not-equal],pattern,value[not-equal]
--   value[max,min,not-equal]
+-   value[max;min;not-equal]
 
 <!-- iteration 4 -->
 
--   integer,value[max,min,not-equal]
--   length[max,min,not-equal],pattern
--   length[max,min,not-equal],unordered
--   length[max,min,not-equal],value[not-equal]
--   length[max,min],pattern,value[not-equal]
--   length[max,not-equal],pattern,value[not-equal]
--   length[min,not-equal],pattern,value[not-equal]
+-   integer,value[max;min;not-equal]
+-   length[max;min;not-equal],pattern
+-   length[max;min;not-equal],unordered
+-   length[max;min;not-equal],value[not-equal]
+-   length[max;min],pattern,value[not-equal]
+-   length[max;not-equal],pattern,value[not-equal]
+-   length[min;not-equal],pattern,value[not-equal]
 
 <!-- iteration 5 -->
 
--   length[max,min,not-equal],pattern,value[not-equal]
+-   length[max;min;not-equal],pattern,value[not-equal]
 
 ### Future Support
 
