@@ -1,4 +1,4 @@
-import { ForcedArray } from "./general";
+import { Hybrid } from "./general";
 import { Schema } from "./schemas";
 
 export interface NoField {}
@@ -8,11 +8,11 @@ export interface InstanceField {
 }
 
 export interface KeyValueField {
-    keyValue: Record<string, Schema | ForcedArray<Schema>>;
+    keyValue: Record<string, Hybrid<Schema>>;
 }
 
 export interface EqualField<Type> {
-    equalTo: Type | ForcedArray<Type>;
+    equalTo: Hybrid<Type>;
 }
 
 export interface MaxField {
@@ -24,7 +24,7 @@ export interface MinField {
 }
 
 export interface NotEqualField<Type> {
-    notEqualTo: Type | ForcedArray<Type>;
+    notEqualTo: Hybrid<Type>;
 }
 
 export interface LengthEqualField {
@@ -48,7 +48,7 @@ export interface PatternField {
 }
 
 export interface SchemaField {
-    schemas: Schema | ForcedArray<Schema>;
+    schemas: Hybrid<Schema>;
 }
 
 export interface ValueEqualField<Type> {
@@ -121,8 +121,7 @@ export type IntegerAndValueMaxNotEqualField = IntegerAndValueMaxField & ValueNot
 
 export type IntegerAndValueMinNotEqualField = IntegerAndValueMinField & ValueNotEqualField<number>;
 
-export type LengthEqualAndPatternAndValueNotEqualField = LengthEqualAndPatternField &
-    ValueNotEqualField<string>;
+export type LengthEqualAndPatternAndValueNotEqualField = LengthEqualAndPatternField & ValueNotEqualField<string>;
 
 export type LengthMaxMinNotEqualField = LengthMaxMinField & LengthNotEqualField;
 
@@ -136,39 +135,31 @@ export type LengthMaxNotEqualAndPatternField = LengthMaxNotEqualField & PatternF
 
 export type LengthMaxNotEqualAndSchemaField = LengthMaxNotEqualField & SchemaField;
 
-export type LengthMaxNotEqualAndValueNotEqualField = LengthMaxNotEqualField &
-    ValueNotEqualField<string>;
+export type LengthMaxNotEqualAndValueNotEqualField = LengthMaxNotEqualField & ValueNotEqualField<string>;
 
-export type LengthMaxAndPatternAndValueNotEqualField = LengthMaxAndPatternField &
-    ValueNotEqualField<string>;
+export type LengthMaxAndPatternAndValueNotEqualField = LengthMaxAndPatternField & ValueNotEqualField<string>;
 
 export type LengthMinNotEqualAndPatternField = LengthMinNotEqualField & PatternField;
 
 export type LengthMinNotEqualAndSchemaField = LengthMinNotEqualField & SchemaField;
 
-export type LengthMinNotEqualAndValueNotEqualField = LengthMinNotEqualField &
-    ValueNotEqualField<string>;
+export type LengthMinNotEqualAndValueNotEqualField = LengthMinNotEqualField & ValueNotEqualField<string>;
 
-export type LengthMinAndPatternAndValueNotEqualField = LengthMinAndPatternField &
-    ValueNotEqualField<string>;
+export type LengthMinAndPatternAndValueNotEqualField = LengthMinAndPatternField & ValueNotEqualField<string>;
 
-export type LengthNotEqualAndPatternAndValueNotEqualField = LengthNotEqualAndPatternField &
-    ValueNotEqualField<string>;
+export type LengthNotEqualAndPatternAndValueNotEqualField = LengthNotEqualAndPatternField & ValueNotEqualField<string>;
 
 export type ValueMaxMinNotEqualField = ValueMaxMinField & ValueNotEqualField<number>;
 
-export type IntegerAndValueMaxMinNotEqualField = IntegerAndValueMaxMinField &
-    ValueNotEqualField<number>;
+export type IntegerAndValueMaxMinNotEqualField = IntegerAndValueMaxMinField & ValueNotEqualField<number>;
 
 export type LengthMaxMinNotEqualAndPatternField = LengthMaxMinNotEqualField & PatternField;
 
 export type LengthMaxMinNotEqualAndSchemaField = LengthMaxMinNotEqualField & SchemaField;
 
-export type LengthMaxMinNotEqualAndValueNotEqualField = LengthMaxMinNotEqualField &
-    ValueNotEqualField<string>;
+export type LengthMaxMinNotEqualAndValueNotEqualField = LengthMaxMinNotEqualField & ValueNotEqualField<string>;
 
-export type LengthMaxMinAndPatternAndValueNotEqualField = LengthMaxMinAndPatternField &
-    ValueNotEqualField<string>;
+export type LengthMaxMinAndPatternAndValueNotEqualField = LengthMaxMinAndPatternField & ValueNotEqualField<string>;
 
 export type LengthMaxNotEqualAndPatternAndValueNotEqualField = LengthMaxNotEqualAndPatternField &
     ValueNotEqualField<string>;
