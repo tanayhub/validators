@@ -1,37 +1,37 @@
 {
-    "name": "@tanayhub/validations",
-    "version": "1.0.0",
-    "description": "A set of intuitive validations for typescript and javascript",
-    "main": "build/index.js",
-    "types": "build/index.d.ts",
-    "scripts": {
-        "build": "tsc",
-        "test": "echo \"Error: no test specified\"",
-        "prepare": "npm run build",
-        "postversion": "git push && git push --tags"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/tanayhub/validations.git"
-    },
-    "keywords": [
-        "validation",
-        "validate",
-        "definition",
-        "intuitive",
-        "schema"
-    ],
-    "author": "tanayhub",
-    "license": "Apache-2.0",
-    "bugs": {
-        "url": "https://github.com/tanayhub/validations/issues"
-    },
-    "homepage": "https://github.com/tanayhub/validations#readme",
-    "devDependencies": {
-        "@types/node": "^17.0.22",
-        "typescript": "^4.6.2"
-    },
-    "files": [
-        "build/**/*"
-    ]
+  "name": "@tanayhub/validations",
+  "version": "1.0.0",
+  "description": "A set of intuitive validations for typescript and javascript",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\"",
+    "prepare": "npm run build",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tanayhub/validations.git"
+  },
+  "keywords": [
+    "validation",
+    "validate",
+    "definition",
+    "intuitive",
+    "schema"
+  ],
+  "author": "tanayhub",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/tanayhub/validations/issues"
+  },
+  "homepage": "https://github.com/tanayhub/validations#readme",
+  "devDependencies": {
+    "@types/node": "^17.0.22",
+    "typescript": "^4.6.2"
+  },
+  "files": [
+    "build/**/*"
+  ]
 }

@@ -1,59 +1,61 @@
 import {
-    BooleanValueField,
-    InstanceField,
-    IntegerField,
-    LengthField,
-    NumberValueField,
-    OrderField,
-    PatternField,
-    PropertyField,
-    SchemaField,
-    StringValueField,
+  BooleanValueField,
+  InstanceField,
+  IntegerField,
+  LengthField,
+  NumberValueField,
+  OrderField,
+  PatternField,
+  PropertyField,
+  SchemaField,
+  StringValueField,
 } from "./fields";
 
-export interface ArraySchema extends Partial<LengthField & OrderField & SchemaField> {
-    type: "array";
+export interface ArraySchema
+  extends Partial<LengthField & OrderField & SchemaField> {
+  type: "array";
 }
 
 export interface BooleanSchema extends Partial<BooleanValueField> {
-    type: "boolean";
+  type: "boolean";
 }
 
 export interface FunctionSchema {
-    type: "function";
+  type: "function";
 }
 
 export interface NullSchema {
-    type: "null";
+  type: "null";
 }
 
 export interface NumberSchema extends Partial<NumberValueField & IntegerField> {
-    type: "number";
+  type: "number";
 }
 
 export interface ObjectSchema extends Partial<InstanceField & PropertyField> {
-    type: "object";
+  type: "object";
 }
 
-export interface StringSchema extends Partial<StringValueField & LengthField & PatternField> {
-    type: "string";
+export interface StringSchema
+  extends Partial<StringValueField & LengthField & PatternField> {
+  type: "string";
 }
 
 export interface UndefinedSchema {
-    type: "undefined";
+  type: "undefined";
 }
 
 export interface UnknownSchema {
-    type: "unknown";
+  type: "unknown";
 }
 
 export type AnySchema =
-    | ArraySchema
-    | BooleanSchema
-    | FunctionSchema
-    | NullSchema
-    | NumberSchema
-    | ObjectSchema
-    | StringSchema
-    | UndefinedSchema
-    | UnknownSchema;
+  | ArraySchema
+  | BooleanSchema
+  | FunctionSchema
+  | NullSchema
+  | NumberSchema
+  | ObjectSchema
+  | StringSchema
+  | UndefinedSchema
+  | UnknownSchema;
