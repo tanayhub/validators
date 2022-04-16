@@ -1,3 +1,11 @@
-import { Validator } from "./validations";
-
-console.log(new Validator({ type: "array", schemas: [{ type: "string" }, { type: "number" }] }).validate([true, 1]));
+export { Validator } from "./validations";
+export {
+    ArraySchemaValidator,
+    BooleanSchemaValidator,
+    FunctionSchemaValidator,
+    NullSchemaValidator,
+    NumberSchemaValidator,
+    ObjectSchemaValidator,
+    StringSchemaValidator,
+    UndefinedSchemaValidator,
+} from "./validations/schemas";
