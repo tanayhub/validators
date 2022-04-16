@@ -1,8 +1,10 @@
 import { Hybrid, Tuple } from "./helper";
 import { AnySchema } from "./schemas";
 
+type BooleanRangeField = EqualToField<boolean> & NotEqualToField<boolean>;
+
 export interface BooleanValueField {
-  value: Partial<EqualToField<boolean> & NotEqualToField<boolean>>;
+  value: Partial<BooleanRangeField>;
 }
 
 export interface EqualToField<Type> {
@@ -18,12 +20,7 @@ export interface IntegerField {
 }
 
 export interface LengthField {
-  length: Partial<
-    EqualToField<Hybrid<number>> &
-      MaxField &
-      MinField &
-      NotEqualToField<Hybrid<number>>
-  >;
+  length: Partial<NumberRangeField>;
 }
 
 export interface MaxField {
@@ -38,13 +35,13 @@ export interface NotEqualToField<Type> {
   notEqualTo: Type;
 }
 
+type NumberRangeField = EqualToField<Hybrid<number>> &
+  MaxField &
+  MinField &
+  NotEqualToField<Hybrid<number>>;
+
 export interface NumberValueField {
-  value: Partial<
-    EqualToField<Hybrid<number>> &
-      MaxField &
-      MinField &
-      NotEqualToField<Hybrid<number>>
-  >;
+  value: Partial<NumberRangeField>;
 }
 
 export interface OrderField {
@@ -63,8 +60,9 @@ export interface SchemaField {
   schemas: Hybrid<AnySchema>;
 }
 
+type StringRangeField = EqualToField<Hybrid<string>> &
+  NotEqualToField<Hybrid<string>>;
+
 export interface StringValueField {
-  value: Partial<
-    EqualToField<Hybrid<string>> & NotEqualToField<Hybrid<string>>
-  >;
+  value: Partial<StringRangeField>;
 }

@@ -10,7 +10,7 @@ export function validateEqualTo<Type>(equalTo: Type): ValidationFunction {
 }
 
 export function validateInstance(
-  callable: CallableFunction
+  callable: CallableFunction,
 ): ValidationFunction {
   return (payload: any): null | string[] => {
     return payload instanceof callable ? null : ["instance"];
@@ -44,10 +44,10 @@ export function validateNotEqualTo<Type>(equalTo: Type): ValidationFunction {
 }
 
 export function validateOrder(
-  tuple: Tuple<Hybrid<AnySchema>>
+  tuple: Tuple<Hybrid<AnySchema>>,
 ): ValidationFunction {
   const validators: Validator[] = tuple.map(
-    (element) => new Validator(element)
+    (element) => new Validator(element),
   );
   const validations: [string, Validator][] = Object.entries(validators);
   return (payload: any): null | string[] => {
@@ -73,12 +73,12 @@ export function validatePattern(pattern: string | RegExp): ValidationFunction {
 }
 
 export function validateProperties(
-  properties: Record<string, Hybrid<AnySchema>>
+  properties: Record<string, Hybrid<AnySchema>>,
 ): ValidationFunction {
   const validations: [string, Validator][] = Object.entries(properties).map(
     ([key, schemas]) => {
       return [key, new Validator(schemas)];
-    }
+    },
   );
   return (payload: any): null | string[] => {
     const errors: string[] = [];
@@ -93,7 +93,7 @@ export function validateProperties(
 }
 
 export function validateSchemas(
-  schemas: Hybrid<AnySchema>
+  schemas: Hybrid<AnySchema>,
 ): ValidationFunction {
   const validator = new Validator(schemas);
   return (payload: any): null | string[] => {
