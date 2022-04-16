@@ -5,13 +5,13 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\"",
-    "prepare": "npm run build",
-    "prepublish": "tsc",
-    "postversion": "git push && git push --tags",
+    "lint": "eslint source",
     "format": "prettier --write \"source/**/*.ts\"",
-    "lint": "eslint source"
+    "test": "echo \"No test specified\"",
+    "prepublish": "tsc",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add .",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",

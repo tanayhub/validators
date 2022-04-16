@@ -66,7 +66,7 @@ export function validateOrder(
 }
 
 export function validatePattern(pattern: string | RegExp): ValidationFunction {
-  const regex: RegExp = new RegExp(pattern);
+  const regex = new RegExp(pattern);
   return (payload: any): null | string[] => {
     return regex.test(payload) ? null : ["pattern"];
   };
