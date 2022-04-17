@@ -1,4 +1,4 @@
-import { Hybrid, Tuple } from "./helper";
+import { Hybrid } from "./helper";
 import { AnySchema } from "./schemas";
 
 type BooleanRangeField = EqualToField<boolean> & NotEqualToField<boolean>;
@@ -45,7 +45,7 @@ export interface NumberValueField {
 }
 
 export interface OrderField {
-  order: Tuple<Hybrid<AnySchema>>;
+  order: Hybrid<AnySchema>[];
 }
 
 export interface PatternField {

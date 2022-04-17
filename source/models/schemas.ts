@@ -45,10 +45,6 @@ export interface UndefinedSchema {
   type: "undefined";
 }
 
-export interface UnknownSchema {
-  type: "unknown";
-}
-
 export type AnySchema =
   | ArraySchema
   | BooleanSchema
@@ -57,5 +53,4 @@ export type AnySchema =
   | NumberSchema
   | ObjectSchema
   | StringSchema
-  | UndefinedSchema
-  | UnknownSchema;
+  | UndefinedSchema;

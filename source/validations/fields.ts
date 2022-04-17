@@ -1,6 +1,7 @@
 import { Validator } from ".";
-import { Hybrid, Tuple, ValidationFunction } from "../models/helper";
+import { Hybrid, ValidationFunction } from "../models/helper";
 import { AnySchema } from "../models/schemas";
+import { hybridToArray } from "../utilities";
 
 export function validateEqualTo<Type>(equalTo: Type): ValidationFunction {
   const set = new Set(Array.isArray(equalTo) ? equalTo : [equalTo]);
@@ -43,12 +44,10 @@ export function validateNotEqualTo<Type>(equalTo: Type): ValidationFunction {
   };
 }
 
-export function validateOrder(
-  tuple: Tuple<Hybrid<AnySchema>>,
-): ValidationFunction {
-  const validators: Validator[] = tuple.map(
-    (element) => new Validator(element),
-  );
+export function validateOrder(tuple: Hybrid<AnySchema>[]): ValidationFunction {
+  const validators: Validator[] = tuple.map((element) => {
+    return new Validator(...hybridToArray<AnySchema>(element));
+  });
   const validations: [string, Validator][] = Object.entries(validators);
   return (payload: any): null | string[] => {
     const errors: string[] = [];
@@ -77,7 +76,7 @@ export function validateProperties(
 ): ValidationFunction {
   const validations: [string, Validator][] = Object.entries(properties).map(
     ([key, schemas]) => {
-      return [key, new Validator(schemas)];
+      return [key, new Validator(...hybridToArray<AnySchema>(schemas))];
     },
   );
   return (payload: any): null | string[] => {
@@ -95,7 +94,7 @@ export function validateProperties(
 export function validateSchemas(
   schemas: Hybrid<AnySchema>,
 ): ValidationFunction {
-  const validator = new Validator(schemas);
+  const validator = new Validator(...hybridToArray<AnySchema>(schemas));
   return (payload: any): null | string[] => {
     const errors: string[] = [];
     for (const [index, value] of Object.entries(payload)) {

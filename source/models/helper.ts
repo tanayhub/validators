@@ -1,6 +1,4 @@
-export type Tuple<Type> = [Type, Type, ...Type[]];
-
-export type Hybrid<Type> = Type | Tuple<Type>;
+export type Hybrid<Type> = Type | Type[];
 
 export type ValidationFunction = (payload: any) => null | string[];
 

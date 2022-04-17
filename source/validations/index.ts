@@ -16,8 +16,8 @@ import {
 export class Validator implements BasicValidator {
   private readonly validators: SchemaValidator[];
 
-  constructor(schema: Hybrid<AnySchema>) {
-    this.validators = hybridToArray<AnySchema>(schema).map((schema) => {
+  constructor(...schemas: AnySchema[]) {
+    this.validators = schemas.map((schema) => {
       if (schema.type === "array") {
         return new ArraySchemaValidator(schema);
       } else if (schema.type === "boolean") {
