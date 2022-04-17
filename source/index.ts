@@ -1,3 +1,4 @@
+export { SchemaType } from "./models/schemas";
 export { Validator } from "./validations";
 export {
   AnySchemaValidator,
