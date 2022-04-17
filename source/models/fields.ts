@@ -1,5 +1,4 @@
-import { Hybrid } from "./helper";
-import { AnySchema } from "./schemas";
+import { SchemaType } from "./schemas";
 
 type BooleanRangeField = EqualToField<boolean> & NotEqualToField<boolean>;
 
@@ -8,7 +7,7 @@ export interface BooleanValueField {
 }
 
 export interface EqualToField<Type> {
-  equalTo: Type;
+  equalTo: Type[];
 }
 
 export interface InstanceField {
@@ -17,6 +16,10 @@ export interface InstanceField {
 
 export interface IntegerField {
   integer: boolean;
+}
+
+export interface ItemsField {
+  items: SchemaType;
 }
 
 export interface LengthField {
@@ -32,37 +35,36 @@ export interface MinField {
 }
 
 export interface NotEqualToField<Type> {
-  notEqualTo: Type;
+  notEqualTo: Type[];
 }
 
-type NumberRangeField = EqualToField<Hybrid<number>> &
+type NumberRangeField = EqualToField<number> &
   MaxField &
   MinField &
-  NotEqualToField<Hybrid<number>>;
+  NotEqualToField<number>;
 
 export interface NumberValueField {
   value: Partial<NumberRangeField>;
-}
-
-export interface OrderField {
-  order: Hybrid<AnySchema>[];
 }
 
 export interface PatternField {
   pattern: string | RegExp;
 }
 
+export interface PossibleField {
+  possible: SchemaType[];
+}
+
 export interface PropertyField {
-  properties: Record<string, Hybrid<AnySchema>>;
+  properties: Record<string, SchemaType>;
 }
 
-export interface SchemaField {
-  schemas: Hybrid<AnySchema>;
-}
-
-type StringRangeField = EqualToField<Hybrid<string>> &
-  NotEqualToField<Hybrid<string>>;
+type StringRangeField = EqualToField<string> & NotEqualToField<string>;
 
 export interface StringValueField {
   value: Partial<StringRangeField>;
+}
+
+export interface TupleField {
+  tuple: SchemaType[];
 }

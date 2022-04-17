@@ -1,12 +1,9 @@
-import {
-  BasicSchemaValidator,
-  Hybrid,
-  ValidationFunction,
-} from "../models/helper";
+import { BasicSchemaValidator, ValidationFunction } from "../models/helper";
 import {
   ArraySchema,
   BooleanSchema,
   FunctionSchema,
+  HybridSchema,
   NullSchema,
   NumberSchema,
   ObjectSchema,
@@ -17,13 +14,14 @@ import {
   validateEqualTo,
   validateInstance,
   validateInteger,
+  validateItems,
   validateMax,
   validateMin,
   validateNotEqualTo,
-  validateOrder,
   validatePattern,
+  validatePossible,
   validateProperties,
-  validateSchemas,
+  validateTuple,
 } from "./fields";
 import {
   isArray,
@@ -36,7 +34,7 @@ import {
   isUndefined,
 } from "./types";
 
-export class SchemaValidator implements BasicSchemaValidator {
+export class AnySchemaValidator implements BasicSchemaValidator {
   private readonly validations: ValidationFunction[];
 
   constructor(...validations: ValidationFunction[]) {
@@ -59,14 +57,14 @@ export class SchemaValidator implements BasicSchemaValidator {
   }
 }
 
-export class ArraySchemaValidator extends SchemaValidator {
+export class ArraySchemaValidator extends AnySchemaValidator {
   constructor(schema: ArraySchema) {
     const validations: ValidationFunction[] = [];
-    const { length, order, schemas } = schema;
+    const { length, tuple, items } = schema;
     if (length !== undefined) {
       const { equalTo, max, min, notEqualTo } = length;
       if (equalTo !== undefined) {
-        validations.push(validateEqualTo<Hybrid<number>>(equalTo));
+        validations.push(validateEqualTo<number>(equalTo));
       }
       if (max !== undefined) {
         validations.push(validateMax(max));
@@ -75,14 +73,14 @@ export class ArraySchemaValidator extends SchemaValidator {
         validations.push(validateMin(min));
       }
       if (notEqualTo !== undefined) {
-        validations.push(validateNotEqualTo<Hybrid<number>>(notEqualTo));
+        validations.push(validateNotEqualTo<number>(notEqualTo));
       }
     }
-    if (order !== undefined) {
-      validations.push(validateOrder(order));
+    if (tuple !== undefined) {
+      validations.push(validateTuple(tuple));
     }
-    if (schemas !== undefined) {
-      validations.push(validateSchemas(schemas));
+    if (items !== undefined) {
+      validations.push(validateItems(items));
     }
     super(...validations);
   }
@@ -92,7 +90,7 @@ export class ArraySchemaValidator extends SchemaValidator {
   }
 }
 
-export class BooleanSchemaValidator extends SchemaValidator {
+export class BooleanSchemaValidator extends AnySchemaValidator {
   constructor(schema: BooleanSchema) {
     const validations: ValidationFunction[] = [];
     const { value } = schema;
@@ -113,7 +111,7 @@ export class BooleanSchemaValidator extends SchemaValidator {
   }
 }
 
-export class FunctionSchemaValidator extends SchemaValidator {
+export class FunctionSchemaValidator extends AnySchemaValidator {
   constructor(schema: FunctionSchema) {
     super();
   }
@@ -123,7 +121,13 @@ export class FunctionSchemaValidator extends SchemaValidator {
   }
 }
 
-export class NullSchemaValidator extends SchemaValidator {
+export class HybridSchemaValidator extends AnySchemaValidator {
+  constructor(schema: HybridSchema) {
+    super(validatePossible(schema.possible));
+  }
+}
+
+export class NullSchemaValidator extends AnySchemaValidator {
   constructor(schema: NullSchema) {
     super();
   }
@@ -133,14 +137,14 @@ export class NullSchemaValidator extends SchemaValidator {
   }
 }
 
-export class NumberSchemaValidator extends SchemaValidator {
+export class NumberSchemaValidator extends AnySchemaValidator {
   constructor(schema: NumberSchema) {
     const validations: ValidationFunction[] = [];
     const { value, integer } = schema;
     if (value !== undefined) {
       const { equalTo, max, min, notEqualTo } = value;
       if (equalTo !== undefined) {
-        validations.push(validateEqualTo<Hybrid<number>>(equalTo));
+        validations.push(validateEqualTo<number>(equalTo));
       }
       if (max !== undefined) {
         validations.push(validateMax(max));
@@ -149,7 +153,7 @@ export class NumberSchemaValidator extends SchemaValidator {
         validations.push(validateMin(min));
       }
       if (notEqualTo !== undefined) {
-        validations.push(validateNotEqualTo<Hybrid<number>>(notEqualTo));
+        validations.push(validateNotEqualTo<number>(notEqualTo));
       }
     }
     if (integer !== undefined) {
@@ -163,7 +167,7 @@ export class NumberSchemaValidator extends SchemaValidator {
   }
 }
 
-export class ObjectSchemaValidator extends SchemaValidator {
+export class ObjectSchemaValidator extends AnySchemaValidator {
   constructor(schema: ObjectSchema) {
     const validations: ValidationFunction[] = [];
     const { properties, instance } = schema;
@@ -181,23 +185,23 @@ export class ObjectSchemaValidator extends SchemaValidator {
   }
 }
 
-export class StringSchemaValidator extends SchemaValidator {
+export class StringSchemaValidator extends AnySchemaValidator {
   constructor(schema: StringSchema) {
     const validations: ValidationFunction[] = [];
     const { value, length, pattern } = schema;
     if (value !== undefined) {
       const { equalTo, notEqualTo } = value;
       if (equalTo !== undefined) {
-        validations.push(validateEqualTo<Hybrid<string>>(equalTo));
+        validations.push(validateEqualTo<string>(equalTo));
       }
       if (notEqualTo !== undefined) {
-        validations.push(validateNotEqualTo<Hybrid<string>>(notEqualTo));
+        validations.push(validateNotEqualTo<string>(notEqualTo));
       }
     }
     if (length !== undefined) {
       const { equalTo, max, min, notEqualTo } = length;
       if (equalTo !== undefined) {
-        validations.push(validateEqualTo<Hybrid<number>>(equalTo));
+        validations.push(validateEqualTo<number>(equalTo));
       }
       if (max !== undefined) {
         validations.push(validateMax(max));
@@ -206,7 +210,7 @@ export class StringSchemaValidator extends SchemaValidator {
         validations.push(validateMin(min));
       }
       if (notEqualTo !== undefined) {
-        validations.push(validateNotEqualTo<Hybrid<number>>(notEqualTo));
+        validations.push(validateNotEqualTo<number>(notEqualTo));
       }
     }
     if (pattern !== undefined) {
@@ -220,7 +224,7 @@ export class StringSchemaValidator extends SchemaValidator {
   }
 }
 
-export class UndefinedSchemaValidator extends SchemaValidator {
+export class UndefinedSchemaValidator extends AnySchemaValidator {
   constructor(schema: UndefinedSchema) {
     super();
   }

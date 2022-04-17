@@ -2,17 +2,22 @@ import {
   BooleanValueField,
   InstanceField,
   IntegerField,
+  ItemsField,
   LengthField,
   NumberValueField,
-  OrderField,
   PatternField,
+  PossibleField,
   PropertyField,
-  SchemaField,
   StringValueField,
+  TupleField,
 } from "./fields";
 
+export interface AnySchema {
+  type: "any";
+}
+
 export interface ArraySchema
-  extends Partial<LengthField & OrderField & SchemaField> {
+  extends Partial<LengthField & TupleField & ItemsField> {
   type: "array";
 }
 
@@ -22,6 +27,10 @@ export interface BooleanSchema extends Partial<BooleanValueField> {
 
 export interface FunctionSchema {
   type: "function";
+}
+
+export interface HybridSchema extends PossibleField {
+  type: "hybrid";
 }
 
 export interface NullSchema {
@@ -45,10 +54,12 @@ export interface UndefinedSchema {
   type: "undefined";
 }
 
-export type AnySchema =
+export type SchemaType =
+  | AnySchema
   | ArraySchema
   | BooleanSchema
   | FunctionSchema
+  | HybridSchema
   | NullSchema
   | NumberSchema
   | ObjectSchema

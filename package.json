@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tanayhub/validations.git"
+    "url": "git+https://github.com/tanayhub/validators.git"
   },
   "keywords": [
     "validation",
@@ -27,9 +27,9 @@
   "author": "tanayhub",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/tanayhub/validations/issues"
+    "url": "https://github.com/tanayhub/validators/issues"
   },
-  "homepage": "https://github.com/tanayhub/validations#readme",
+  "homepage": "https://github.com/tanayhub/validators#readme",
   "devDependencies": {
     "@types/node": "^17.0.22",
     "@typescript-eslint/eslint-plugin": "^5.19.0",

@@ -1,5 +1,3 @@
-export type Hybrid<Type> = Type | Type[];
-
 export type ValidationFunction = (payload: any) => null | string[];
 
 export interface BasicValidator {

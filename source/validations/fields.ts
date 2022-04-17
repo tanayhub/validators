@@ -1,10 +1,9 @@
 import { Validator } from ".";
-import { Hybrid, ValidationFunction } from "../models/helper";
-import { AnySchema } from "../models/schemas";
-import { hybridToArray } from "../utilities";
+import { ValidationFunction } from "../models/helper";
+import { SchemaType } from "../models/schemas";
 
-export function validateEqualTo<Type>(equalTo: Type): ValidationFunction {
-  const set = new Set(Array.isArray(equalTo) ? equalTo : [equalTo]);
+export function validateEqualTo<Type>(equalTo: Type[]): ValidationFunction {
+  const set = new Set(equalTo);
   return (payload: any): null | string[] => {
     return set.has(payload) ? null : ["equality"];
   };
@@ -21,46 +20,28 @@ export function validateInstance(
 export function validateInteger(should: boolean): ValidationFunction {
   return (payload: any): null | string[] => {
     const includeDecimal = new String(payload).valueOf().includes(".");
-    return includeDecimal !== should ? null : ["integer"];
+    return includeDecimal !== should
+      ? null
+      : [should ? "not-integer" : "integer"];
   };
 }
 
 export function validateMax(max: number): ValidationFunction {
   return (payload: any): null | string[] => {
-    return payload > max ? ["max"] : null;
+    return payload < max ? null : ["max"];
   };
 }
 
 export function validateMin(min: number): ValidationFunction {
   return (payload: any): null | string[] => {
-    return min > payload ? ["min"] : null;
+    return payload > min ? null : ["min"];
   };
 }
 
-export function validateNotEqualTo<Type>(equalTo: Type): ValidationFunction {
-  const set = new Set(Array.isArray(equalTo) ? equalTo : [equalTo]);
+export function validateNotEqualTo<Type>(equalTo: Type[]): ValidationFunction {
+  const set = new Set(equalTo);
   return (payload: any): null | string[] => {
     return set.has(payload) ? null : ["inequality"];
-  };
-}
-
-export function validateOrder(tuple: Hybrid<AnySchema>[]): ValidationFunction {
-  const validators: Validator[] = tuple.map((element) => {
-    return new Validator(...hybridToArray<AnySchema>(element));
-  });
-  const validations: [string, Validator][] = Object.entries(validators);
-  return (payload: any): null | string[] => {
-    const errors: string[] = [];
-    if (validations.length !== payload.length) {
-      errors.push("length.equality");
-    }
-    for (const [index, validator] of validations) {
-      const result = validator.validate(payload[index]);
-      if (Array.isArray(result)) {
-        errors.push(...result.map((error) => `[${index}].${error}`));
-      }
-    }
-    return errors.length > 0 ? errors : null;
   };
 }
 
@@ -71,12 +52,19 @@ export function validatePattern(pattern: string | RegExp): ValidationFunction {
   };
 }
 
+export function validatePossible(possible: SchemaType[]): ValidationFunction {
+  const validator = new Validator(...possible);
+  return (payload: any): null | string[] => {
+    return validator.validate(payload);
+  };
+}
+
 export function validateProperties(
-  properties: Record<string, Hybrid<AnySchema>>,
+  properties: Record<string, SchemaType>,
 ): ValidationFunction {
   const validations: [string, Validator][] = Object.entries(properties).map(
-    ([key, schemas]) => {
-      return [key, new Validator(...hybridToArray<AnySchema>(schemas))];
+    ([key, schema]) => {
+      return [key, new Validator(schema)];
     },
   );
   return (payload: any): null | string[] => {
@@ -91,14 +79,32 @@ export function validateProperties(
   };
 }
 
-export function validateSchemas(
-  schemas: Hybrid<AnySchema>,
-): ValidationFunction {
-  const validator = new Validator(...hybridToArray<AnySchema>(schemas));
+export function validateItems(schema: SchemaType): ValidationFunction {
+  const validator = new Validator(schema);
   return (payload: any): null | string[] => {
     const errors: string[] = [];
     for (const [index, value] of Object.entries(payload)) {
       const result = validator.validate(value);
+      if (Array.isArray(result)) {
+        errors.push(...result.map((error) => `[${index}].${error}`));
+      }
+    }
+    return errors.length > 0 ? errors : null;
+  };
+}
+
+export function validateTuple(tuple: SchemaType[]): ValidationFunction {
+  const validators: Validator[] = tuple.map((schema) => {
+    return new Validator(schema);
+  });
+  const validations: [string, Validator][] = Object.entries(validators);
+  return (payload: any): null | string[] => {
+    const errors: string[] = [];
+    if (validations.length !== payload.length) {
+      errors.push("length.equality");
+    }
+    for (const [index, validator] of validations) {
+      const result = validator.validate(payload[index]);
       if (Array.isArray(result)) {
         errors.push(...result.map((error) => `[${index}].${error}`));
       }
