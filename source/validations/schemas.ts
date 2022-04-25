@@ -1,3 +1,5 @@
+import ValidationError from "../errors";
+import DataTypeValidationError from "../errors/types";
 import { BasicSchemaValidator, ValidationFunction } from "../models/helper";
 import {
   ArraySchema,
@@ -41,14 +43,14 @@ export class AnySchemaValidator implements BasicSchemaValidator {
     this.validations = validations;
   }
 
-  public validateType(payload: any): null | string[] {
+  public validateType(payload: any): null | ValidationError[] {
     return null;
   }
 
-  public validate(payload: any): null | string[] {
+  public validate(payload: any): null | ValidationError[] {
     const typeResult = this.validateType(payload);
     if (typeResult) return typeResult;
-    const errors: string[] = [];
+    const errors: ValidationError[] = [];
     for (const validate of this.validations) {
       const result = validate(payload);
       if (Array.isArray(result)) errors.push(...result);
@@ -64,16 +66,16 @@ export class ArraySchemaValidator extends AnySchemaValidator {
     if (length !== undefined) {
       const { equalTo, max, min, notEqualTo } = length;
       if (equalTo !== undefined) {
-        validations.push(validateEqualTo<number>(equalTo));
+        validations.push(validateEqualTo<number>(equalTo, "length"));
       }
       if (max !== undefined) {
-        validations.push(validateMax(max));
+        validations.push(validateMax(max, "length"));
       }
       if (min !== undefined) {
-        validations.push(validateMin(min));
+        validations.push(validateMin(min, "length"));
       }
       if (notEqualTo !== undefined) {
-        validations.push(validateNotEqualTo<number>(notEqualTo));
+        validations.push(validateNotEqualTo<number>(notEqualTo, "length"));
       }
     }
     if (tuple !== undefined) {
@@ -85,8 +87,10 @@ export class ArraySchemaValidator extends AnySchemaValidator {
     super(...validations);
   }
 
-  public validateType(payload: any): null | string[] {
-    return isArray(payload) ? null : ["datatype:array"];
+  public validateType(payload: any): null | ValidationError[] {
+    return isArray(payload)
+      ? null
+      : [new DataTypeValidationError(typeof payload, "array")];
   }
 }
 
@@ -106,8 +110,10 @@ export class BooleanSchemaValidator extends AnySchemaValidator {
     super(...validations);
   }
 
-  public validateType(payload: any): null | string[] {
-    return isBoolean(payload) ? null : ["datatype:boolean"];
+  public validateType(payload: any): null | ValidationError[] {
+    return isBoolean(payload)
+      ? null
+      : [new DataTypeValidationError(typeof payload, "boolean")];
   }
 }
 
@@ -116,8 +122,10 @@ export class FunctionSchemaValidator extends AnySchemaValidator {
     super();
   }
 
-  public validateType(payload: any): null | string[] {
-    return isFunction(payload) ? null : ["datatype:function"];
+  public validateType(payload: any): null | ValidationError[] {
+    return isFunction(payload)
+      ? null
+      : [new DataTypeValidationError(typeof payload, "function")];
   }
 }
 
@@ -132,8 +140,10 @@ export class NullSchemaValidator extends AnySchemaValidator {
     super();
   }
 
-  public validateType(payload: any): null | string[] {
-    return isNull(payload) ? null : ["datatype:null"];
+  public validateType(payload: any): null | ValidationError[] {
+    return isNull(payload)
+      ? null
+      : [new DataTypeValidationError(typeof payload, "null")];
   }
 }
 
@@ -162,8 +172,10 @@ export class NumberSchemaValidator extends AnySchemaValidator {
     super(...validations);
   }
 
-  public validateType(payload: any): null | string[] {
-    return isNumber(payload) ? null : ["datatype:number"];
+  public validateType(payload: any): null | ValidationError[] {
+    return isNumber(payload)
+      ? null
+      : [new DataTypeValidationError(typeof payload, "number")];
   }
 }
 
@@ -180,8 +192,16 @@ export class ObjectSchemaValidator extends AnySchemaValidator {
     super(...validations);
   }
 
-  public validateType(payload: any): null | string[] {
-    return isObject(payload) ? null : ["datatype:object"];
+  public validateType(payload: any): null | ValidationError[] {
+    if (isObject(payload)) {
+      return null;
+    } else if (isNull(payload)) {
+      return [new DataTypeValidationError("null", "object")];
+    } else if (isArray(payload)) {
+      return [new DataTypeValidationError("array", "object")];
+    } else {
+      return [new DataTypeValidationError(typeof payload, "object")];
+    }
   }
 }
 
@@ -201,16 +221,16 @@ export class StringSchemaValidator extends AnySchemaValidator {
     if (length !== undefined) {
       const { equalTo, max, min, notEqualTo } = length;
       if (equalTo !== undefined) {
-        validations.push(validateEqualTo<number>(equalTo));
+        validations.push(validateEqualTo<number>(equalTo, "length"));
       }
       if (max !== undefined) {
-        validations.push(validateMax(max));
+        validations.push(validateMax(max, "length"));
       }
       if (min !== undefined) {
-        validations.push(validateMin(min));
+        validations.push(validateMin(min, "length"));
       }
       if (notEqualTo !== undefined) {
-        validations.push(validateNotEqualTo<number>(notEqualTo));
+        validations.push(validateNotEqualTo<number>(notEqualTo, "length"));
       }
     }
     if (pattern !== undefined) {
@@ -219,8 +239,10 @@ export class StringSchemaValidator extends AnySchemaValidator {
     super(...validations);
   }
 
-  public validateType(payload: any): null | string[] {
-    return isString(payload) ? null : ["datatype:string"];
+  public validateType(payload: any): null | ValidationError[] {
+    return isString(payload)
+      ? null
+      : [new DataTypeValidationError(typeof payload, "string")];
   }
 }
 
@@ -229,7 +251,9 @@ export class UndefinedSchemaValidator extends AnySchemaValidator {
     super();
   }
 
-  public validateType(payload: any): null | string[] {
-    return isUndefined(payload) ? null : ["datatype:undefined"];
+  public validateType(payload: any): null | ValidationError[] {
+    return isUndefined(payload)
+      ? null
+      : [new DataTypeValidationError(typeof payload, "undefined")];
   }
 }

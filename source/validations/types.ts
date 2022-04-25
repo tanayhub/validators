@@ -19,7 +19,9 @@ export function isNumber(payload: any): payload is number {
 }
 
 export function isObject(payload: any): payload is object {
-  return typeof payload === "object" && payload !== null;
+  return (
+    typeof payload === "object" && payload !== null && !Array.isArray(payload)
+  );
 }
 
 export function isString(payload: any): payload is string {

@@ -1,3 +1,4 @@
+import ValidationError from "../errors";
 import { BasicValidator } from "../models/helper";
 import { SchemaType } from "../models/schemas";
 import {
@@ -42,8 +43,8 @@ export class Validator implements BasicValidator {
     });
   }
 
-  public validate(payload: any): null | string[] {
-    const errors: string[] = [];
+  public validate(payload: any): null | ValidationError[] {
+    const errors: ValidationError[] = [];
     for (const validator of this.validators) {
       const result = validator.validate(payload);
       if (Array.isArray(result)) errors.push(...result);
