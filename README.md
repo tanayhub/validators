@@ -1,153 +1,131 @@
 # @tanayhub/validators
 
-> A set of intuitive validations for typescript and javascript
----
-## Installation
+A set of intuitive validations for typescript and javascript
+
+# Table Of Contents
+
+- [Installation](#installation)
+- [Information](#information)
+- [Definitions](#definitions)
+
+# Installation
+
+Using NPM
 
 ```
-npm i @tanayhub/validators -s
+npm install @tanayhub/validators --save
 ```
-or
+
+Using YARN
+
 ```
 yarn add @tanayhub/validators
 ```
----
+
+# Information
+
+## Require/Import
+
+Using CommonJS
+
+```js
+const {
+  SchemaValidator,
+  ValidationError,
+  Violation,
+} = require("@tanayhub/validators");
+```
+
+Using ES6
+
+```js
+import {
+  SchemaValidator,
+  ValidationError,
+  Violation,
+} from "@tanayhub/validators";
+```
+
 ## Usage
-```js
-import { Validator } from "@tanayhub/validators";
-/* const { Validator } = require("@tanayhub/validators"); */
 
-const validator = new Validator(/* comma separated schemas */);
-/* later somewhere in the code */
-validator.validate(/* payload */);
-```
-### Examples
 ```js
-import { Validator } from "@tanayhub/validators";
-const validator = new Validator({ type: "string" });
-/* later on in code */
-validator.validate("john doe");
-/* returns `null` indicating no errors */
+/* compile desired schemas */
+const validator = new SchemaValidator(/* comma separated schemas */);
+
+/* use compiled validator anywhere */
+validator.validate(/* payload to be validated */);
+```
+
+> `validator.validate()` return nothing on successful validation, whereas on failure it throws an error called `ValidationError` which can be imported as specified in [Installation](#installation)
+
+> Each `ValidationError` contains a list of violations as follows `ValidationError { name: "ValidationError", violations: Violation[] }`, and type of each violation can be import as specified in [Installation](#installation)
+
+## Examples
+
+```js
+/**
+ * following example verifies whether the given payload
+ * is either an integer between 0 to 999 or the same number
+ * but with datatype string
+ */
+const validator = new SchemaValidator(
+  { type: "string", pattern: /[0-9]+/, length: { min: 1, max: 3 } },
+  { type: "number", isInteger: true, value: { min: 0, max: 999 } }
+);
+/* therefore */
+
+/* does not throw Error as valid */
+validator.validate("235");
+
+/* does not throw Error as valid */
+validator.validate(235);
+
+/* throws Error as invalid */
 validator.validate(true);
-/* returns `["datatype:string"]` indicating payload should be string */
-```
-```js
-import { Validator } from "@tanayhub/validators";
-const validator = new Validator({ type: "string", length: { min: 6 } });
-/* later on in code */
-validator.validate("length");
-/* returns `null` indicating no errors */
-validator.validate("invalid length");
-/* returns `["length.equality"]` indicating payload length is not equal to given value */
-```
-## Schemas
+/*
+ValidationError {
+  name: "ValidationError";
+  violations: [
+    Violation {
+      message: "expected datatype did not satisfy",
+      expected: "string",
+      received: "boolean"
+    },
+    Violation {
+      message: "expected datatype did not satisfy",
+      expected: "number",
+      received: "boolean"
+    }
+  ]
+}
 
-### Any Schema
-Use this schema when actual type of the schema doesn't matter
-```ts
-import { SchemaType } from "@tanayhub/validators";
-const schema: SchemaType = { type: "any" };
-```
-
-### Array Schema
-Use this schema to validate an array. You can also add additional validation criterias
-```ts
-import { SchemaType } from "@tanayhub/validators";
-const schema: SchemaType = { type: "array" };
-```
-```ts
-import { SchemaType } from "@tanayhub/validators";
-const schema: SchemaType = { type: "array", length: { max: 5, min: 0 } };
-```
-> In the above example `length.max` and `length.min` are 2 different criterias. An extensive list is given below
-
-| criteria | value data type | description | required |
-| -- | -- | -- | -- |
-|length.equalTo|array:number| possible length values | false |
-|length.max|number|max length of array | false |
-|length.min|number|min length of array | false |
-|length.notEqualTo|array:number| impossible length values | false |
-|items|schema| schema for each element of the array | false |
-|tuple|array:schema| validates each corresponding index with given schema at the same index | false |
-
-### Boolean Schema
-Use this schema to validate a boolean. You can also add additional validation criterias
-```ts
-import { SchemaType } from "@tanayhub/validators";
-const schema: SchemaType = { type: "boolean" };
+/* throws Error as invalid */
+validator.validate("12bm12");
+/*
+ValidationError {
+  name: "ValidationError";
+  violations: [
+    Violation {
+      message: "expected pattern did not satisfy",
+      expected: "[0-9]+",
+      received: "12bm12"
+    },
+    Violation {
+      message: "length/expected value should be the maximum",
+      expected: 3,
+      received: 6
+    }
+  ]
+}
+*/
 ```
 
-| criteria | value data type | description | required |
-| -- | -- | -- | -- |
-|value.equalTo|array:boolean| possible values | false |
-|value.notEqualTo|array:boolean| impossible values | false |
+# Definitions
 
-### Function Schema
-Use this schema to validate a function
-```ts
-import { SchemaType } from "@tanayhub/validators";
-const schema: SchemaType = { type: "function" };
-```
+> You can import `TypeSchema` in typescript
 
-### Hybrid Schema
-Use this schema to validate using multiple schemas. Even if one schema satisfies, it'll return `null` as output. You can also add additional validation criterias
 ```ts
-import { SchemaType } from "@tanayhub/validators";
-const schema: SchemaType = { type: "hybrid", possible: [/* comma separated schemas */] };
-```
-| criteria | value data type | description | required |
-| -- | -- | -- | -- |
-|possible|array:schema| either schema should satisfy | true |
+import { TypeSchema } from "@tanayhub/validators";
 
-### Null Schema
-Use this schema to validate null
-```ts
-import { SchemaType } from "@tanayhub/validators";
-const schema: SchemaType = { type: "null" };
-```
-### Number Schema
-Use this schema to validate a number. You can also add additional validation criterias
-```ts
-import { SchemaType } from "@tanayhub/validators";
-const schema: SchemaType = { type: "number" };
-```
-| criteria | value data type | description | required |
-| -- | -- | -- | -- |
-|value.equalTo|array:number| possible values | false |
-|value.max|number|max value | false |
-|value.min|number|min value | false |
-|value.notEqualTo|array:number| impossible values | false |
-|integer|boolean| whether the payload should be an integer | false |
-
-### Object Schema
-Use this schema to validate an object. You can also add additional validation criterias
-```ts
-import { SchemaType } from "@tanayhub/validators";
-const schema: SchemaType = { type: "object" };
-```
-| criteria | value data type | description | required |
-| -- | -- | -- | -- |
-|instance|class| check if the payload is instance for class | false |
-|properties| object:string-schema | validate each property of the object | false |
-
-### String Schema
-Use this schema to validate a string. You can also add additional validation criterias
-```ts
-import { SchemaType } from "@tanayhub/validators";
-const schema: SchemaType = { type: "string" };
-```
-| criteria | value data type | description | required |
-| -- | -- | -- | -- |
-|length.equalTo|array:number| possible length values | false |
-|length.max|number|max length of array | false |
-|length.min|number|min length of array | false |
-|length.notEqualTo|array:number| impossible length values | false |
-|value.equalTo|array:string| possible values | false |
-|value.notEqualTo|array:string| impossible values | false |
-|pattern|string or regex | should match given pattern | false |
-### Undefined Schema
-Use this schema to validate undefined
-```ts
-import { SchemaType } from "@tanayhub/validators";
-const schema: SchemaType = { type: "undefined" };
+const schema: TypeSchema = /* definition */;
 ```
