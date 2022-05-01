@@ -10,11 +10,11 @@ export class SchemaValidator {
     this.validations = schemas.map(typeSchema);
   }
 
-  validate(payload: unknown): true {
+  validate(payload: any): void {
     const errors: Violation[] = [];
     for (const validate of this.validations) {
       const result = validate(payload);
-      if (result.length === 0) return true;
+      if (result.length === 0) return;
       errors.push(...result);
     }
     throw new ValidationError(errors);

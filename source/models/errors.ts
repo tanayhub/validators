@@ -2,10 +2,10 @@ import { Violation } from "./general";
 
 export class ValidationError extends Error {
   public readonly name = "ValidationError";
-  public readonly errors: Violation[];
+  public readonly violations: Violation[];
 
-  constructor(errors: Violation[]) {
+  constructor(violations: Violation[]) {
     super();
-    this.errors = errors;
+    this.violations = violations;
   }
 }
