@@ -1,4 +1,4 @@
-import { Hybrid } from "./general";
+import { Class, Hybrid } from "./general";
 import { TypeSchema } from "./types";
 
 /* simple fields */
@@ -10,7 +10,7 @@ export interface FieldEqualTo<Type> {
 }
 
 export interface FieldIsInstanceOf {
-  isInstanceOf: CallableFunction;
+  isInstanceOf: Class;
 }
 
 export interface FieldIsInteger {
@@ -47,19 +47,19 @@ export interface FieldProperties {
 
 /* complex fields */
 
-export type CompareNumber = FieldEqualTo<Hybrid<number>> &
+export type Compare<Type = Hybrid<number>> = FieldEqualTo<Type> &
   FieldMax &
   FieldMin &
-  FieldNotEqualTo<Hybrid<number>>;
+  FieldNotEqualTo<Type>;
 
 export type CompareEquality<Type> = FieldEqualTo<Type> & FieldNotEqualTo<Type>;
 
 export interface FieldLength {
-  length: Partial<CompareNumber>;
+  length: Partial<Compare>;
 }
 
 export interface FieldValueNumber {
-  value: Partial<CompareNumber>;
+  value: Partial<Compare>;
 }
 
 export interface FieldValueEquality<Type> {

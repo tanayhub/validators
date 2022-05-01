@@ -2,14 +2,16 @@ export type Hybrid<Type> = Type | Type[];
 
 export type Equality = Hybrid<number> | Hybrid<string> | boolean;
 
+export type Class = new () => unknown;
+
 export class Violation {
   public path?: string;
-  public readonly error: string;
+  public message: string;
   public readonly expected: unknown;
   public readonly received: unknown;
 
-  constructor(error: string, expected: unknown, received: unknown) {
-    this.error = error;
+  constructor(message: string, expected: unknown, received: unknown) {
+    this.message = message;
     this.expected = expected;
     this.received = received;
   }
