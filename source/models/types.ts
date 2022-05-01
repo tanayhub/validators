@@ -1,12 +1,9 @@
 import {
   ConstraintArray,
   ConstraintBoolean,
-  ConstraintFunction,
-  ConstraintNull,
   ConstraintNumber,
   ConstraintObject,
   ConstraintString,
-  ConstraintUndefined,
 } from "./constraints";
 
 /* simple types */
@@ -19,11 +16,11 @@ export interface TypeBoolean extends Partial<ConstraintBoolean> {
   type: "boolean";
 }
 
-export interface TypeFunction extends Partial<ConstraintFunction> {
+export interface TypeFunction {
   type: "function";
 }
 
-export interface TypeNull extends Partial<ConstraintNull> {
+export interface TypeNull {
   type: "null";
 }
 
@@ -39,7 +36,7 @@ export interface TypeString extends Partial<ConstraintString> {
   type: "string";
 }
 
-export interface TypeUndefined extends Partial<ConstraintUndefined> {
+export interface TypeUndefined {
   type: "undefined";
 }
 

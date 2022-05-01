@@ -3,8 +3,6 @@ import { TypeSchema } from "./types";
 
 /* simple fields */
 
-export interface FieldEmpty {}
-
 export interface FieldEqualTo<Type> {
   equalTo: Type;
 }

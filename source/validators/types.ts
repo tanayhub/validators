@@ -54,6 +54,7 @@ export function typeBoolean(schema: TypeBoolean): ValidationFunction {
 }
 
 export function typeFunction(schema: TypeFunction): ValidationFunction {
+  schema.type === "function";
   const validations: ValidationFunction[] = [];
 
   return (payload: unknown) => {
@@ -66,6 +67,7 @@ export function typeFunction(schema: TypeFunction): ValidationFunction {
 }
 
 export function typeNull(schema: TypeNull): ValidationFunction {
+  schema.type === "null";
   const validations: ValidationFunction[] = [];
 
   return (payload: unknown) => {
@@ -132,6 +134,7 @@ export function typeString(schema: TypeString): ValidationFunction {
 }
 
 export function typeUndefined(schema: TypeUndefined): ValidationFunction {
+  schema.type === "undefined";
   const validations: ValidationFunction[] = [];
 
   return (payload: unknown) => {
@@ -152,5 +155,5 @@ export function typeSchema(schema: TypeSchema): ValidationFunction {
   else if (schema.type === "object") return typeObject(schema);
   else if (schema.type === "string") return typeString(schema);
   else if (schema.type === "undefined") return typeUndefined(schema);
-  else return (payload: unknown) => [];
+  else return () => [];
 }
