@@ -146,10 +146,9 @@ export function fieldProperties(
           const result = validate(payload[property]);
           if (result.length === 0) return [];
           result.forEach((violation) => {
-            if (violation.path)
-              violation.path = violation.path
-                ? `${property}.${violation.path}`
-                : property;
+            violation.path = violation.path
+              ? `${property}.${violation.path}`
+              : property;
           });
           violations.push(...result);
         }
