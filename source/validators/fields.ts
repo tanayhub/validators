@@ -1,11 +1,11 @@
 import { Compare } from "../models/fields";
 import {
-  Hybrid,
-  ValidationFunction,
-  Equality,
-  Primitive,
-  Violation,
   Class,
+  Equality,
+  Hybrid,
+  Primitive,
+  ValidationFunction,
+  Violation,
 } from "../models/general";
 import { TypeSchema } from "../models/types";
 import { typeSchema } from "./types";
@@ -146,7 +146,7 @@ export function fieldProperties(
           const result = validate(payload[property]);
           if (result.length === 0) return [];
           result.forEach((violation) => {
-            violation.path = `${violation.path ?? ""}.${property}`;
+            violation.path = `${property}.${violation.path ?? ""}`;
           });
           violations.push(...result);
         }
